@@ -1,0 +1,53 @@
+<!--
+<div (click) = "logoClicked()">
+	<a [routerLink]="['/test']" class="btn btn-link">LOGO</a>
+</div>
+-->
+<!-- https://medium.com/@ct7/the-simple-way-to-make-a-mobile-angular-2-bootstrap-navbar-without-jquery-d6b3f67b037b -->
+<!-- la navbar di default è alta 50px, quindi ho paddato il body di 60px nel css -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- LOGO -->
+        <div class="navbar-header">
+        	<button type="button" class="navbar-toggle collapsed" (click)="toggleState()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a [routerLink]="['/']" class="navbar-brand" (click)="collapseMenu()">Brain.B</a>
+        </div>
+        <!-- Menu Items -->
+        <div class="collapse navbar-collapse" [ngClass]="{ 'in': isIn }">
+            <!-- LEFT -->
+        	<ul class="nav navbar-nav" (click)="collapseMenu()">
+                <!-- Categories -->
+            	<li>
+                    <a [routerLink]="['/']"><span class="glyphicon glyphicon-th"></span> Categories</a>
+                    <!-- Un giorno vorrei ci fosse un dropdown menu ma per ora non funziona
+                    <ul hidden>
+                        <li><a>test1</a></li>
+                        <li><a>test2</a></li>
+                    </ul>
+                    -->
+                </li>
+                <!-- SHOP -->
+                <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-tags"></span> Shop</a></li>
+            </ul>
+
+            <!-- Se è collassato metti una linea in mezzo -->
+            <div *ngIf="isIn" class="dropdown-divider"><hr></div>
+
+            <!-- RIGHT -->
+            <!-- if not logged in -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- REGISTER -->
+                <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-user"></span> Contacts</a></li>
+                <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-question-sign"></span> faq</a></li>
+                <!-- LOGIN 
+                <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                -->
+		    </ul>
+    	</div>
+    </div>
+</nav>

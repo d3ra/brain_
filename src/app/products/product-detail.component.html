@@ -1,0 +1,34 @@
+<h1>PRODUCT DETAILS</h1>
+<div *ngIf="product$ | async as product">
+	<h2>{{product.name}}</h2>
+
+  <div>
+    <p>SIZE</p>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary active">
+        <input type="radio" name="options" id="optionXS" autocomplete="off" checked /> XS
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="optionS" autocomplete="off" /> S
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="optionM" autocomplete="off" /> M
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="optionL" autocomplete="off" /> L
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="optionXL" autocomplete="off" /> XL
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <p>QUANTITY</p>
+    <button class="btn btn-minus" (click)="addQuantity(-1)">-</button>
+    <label> {{quantity}} </label>
+    <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
+  </div>
+
+  <button (click)="addToCart(product._id, {size: 'S', quantity: quantity})">ADD to CART</button>
+</div>
