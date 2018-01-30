@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { HomeComponent } from './home/home.component';
 
 import { ProductsModule } from './products/products.module';
+import { CartModule } from './cart/cart.module';
 
 import { NavbarModule } from './navbar/navbar.module';
 
@@ -21,6 +22,7 @@ import { Cart } from './models/cart';
     BrowserModule,
     HttpModule,
     NavbarModule,
+    CartModule,
     ProductsModule,
     AppRoutingModule
   ],
