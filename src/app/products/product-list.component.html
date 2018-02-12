@@ -1,4 +1,4 @@
 <h1>PRODUCT LIST</h1>
-<ul *ngFor="let product of products$ | async">
+<ul *ngFor="let product of types">
 	<li><a [routerLink]="['/product', product.code]">{{ product.name }}</a>: ${{ product.price }}</li>
 </ul>

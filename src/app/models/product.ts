@@ -3,12 +3,9 @@ export class Product {
   name: string;
   code: string;
   price: number;
+  size: string;
   color: string;
-  size: {
-    XS: number;
-    S: number;
-    M: number;
-    L: number;
-    XL: number;
-  }
+  type: string;
+  category: string[];
+  quantity: number;
 }

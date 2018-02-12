@@ -1,5 +1,5 @@
 <h1>PRODUCT DETAILS</h1>
-<div *ngIf="product$ | async as product">
+<div *ngIf="product as product">
 	<h2>{{product.name}}</h2>
 
   <div>
@@ -30,5 +30,5 @@
     <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
   </div>
 
-  <button (click)="addToCart(product._id, {size: 'S', quantity: quantity})">ADD to CART</button>
+  <button (click)="addToCart(product)">ADD to CART</button>
 </div>

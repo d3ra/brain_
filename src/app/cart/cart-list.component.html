@@ -1,2 +1,16 @@
 <h3>CART-LIST</h3>
+<!--VUOTO-->
+<div *ngIf="cart.isEmpty()">
+	<p>Your shopping cart is empty :(</p>
+
+</div>
+<!--PIENO-->
+<div *ngIf="!cart.isEmpty()">
+	<ul *ngFor="let product of cart.products">
+		<li><a [routerLink]="['/product', product.code]">{{ product.name }}</a>: ${{ product.price }} <span class="glyphicon glyphicon-remove" (click)="removeFromCart(product.code)"></span></li>
+	</ul>
+</div>
+
+<p>TOTAL: {{cart.total}} </p>
+
 <button [routerLink]="['/checkout']">Checkout</button>

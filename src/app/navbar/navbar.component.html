@@ -35,12 +35,13 @@
                 <li><a [routerLink]="['/products']"><span class="glyphicon glyphicon-tags"></span> Products</a></li>
             </ul>
 
-            <!-- Se è collassato metti una linea in mezzo -->
+            <!-- Se è collassato metti una linea in mezzo 
             <div *ngIf="isIn" class="dropdown-divider"><hr></div>
+            -->
 
             <!-- RIGHT -->
             <!-- if not logged in -->
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" (click)="collapseMenu()">
                 <li><a [routerLink]="['/cart']"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                 <!-- Contatti e faq le metterei nel footer
                 <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-user"></span> Contacts</a></li>

@@ -16,6 +16,7 @@ import { Cart } from '../models/cart';
 export class ProductDetailComponent implements OnInit {
 
   product$: Observable<Product>;
+  product: Product;
   quantity: number;
   minQuantity: number;
   maxQuantity: number;
@@ -23,22 +24,42 @@ export class ProductDetailComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
-
-
-
     this.quantity = 1;
 	  this.product$ = this.route.paramMap
 	  .switchMap((params: ParamMap) => {
 		  //console.log("product-detail.component:" + params.get('id'));
 		  return this.productService.getProduct(params.get('code'))
 	  });
+
+    this.product$.subscribe(
+      product => {
+        this.product = product;
+        
+      },
+      error => console.log("ERROR"),
+      () => console.log("finish")
+    );
+
   }
 
-  addToCart(id: number | string, options: PurchaseOptions) {
-    //console.log("Add to cart: " + id);
-    console.log(localStorage.getItem('cart'));
-    let cart = localStorage.getItem('cart');
-    
+  addToCart(product: Product) {
+    let newCart: Cart = new Cart();
+
+    if(localStorage.getItem('my-cart') === null) {
+      newCart.addProduct(product);
+      localStorage.setItem('my-cart', JSON.stringify(newCart));
+    } else {
+      // se ho già un carrello
+      let currentCart = JSON.parse(localStorage.getItem('my-cart'));
+      // aggiungo i suoi oggetti al mio carrello
+      for (let p of currentCart.products) {
+        newCart.addProduct(p);
+      }
+      newCart.addProduct(product);
+      // salva il carrello sul localStorage
+      localStorage.setItem('my-cart', JSON.stringify(newCart));
+    }
+    alert("Product " + product.code + " Added")
   }
 
   addQuantity(num: number) {
