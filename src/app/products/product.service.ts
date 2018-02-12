@@ -19,7 +19,7 @@ export class ProductService {
   }
 
   getProduct(id: number | string):Observable<Product> {
-  	//console.log("product.service: " + id);
+  	console.log("product.service: " + id);
   	return this._http.get("/api/products/" + id)
       .map(result => this.result = result.json());
   }

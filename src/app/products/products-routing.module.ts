@@ -6,7 +6,7 @@ import { ProductDetailComponent }  from './product-detail.component';
 
 const productsRoutes: Routes = [
   { path: 'products',  component: ProductListComponent },
-  { path: 'product/:code', component: ProductDetailComponent }
+  { path: 'product/:type', component: ProductDetailComponent }
 ];
 
 @NgModule({

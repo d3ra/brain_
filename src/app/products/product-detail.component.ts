@@ -28,13 +28,13 @@ export class ProductDetailComponent implements OnInit {
 	  this.product$ = this.route.paramMap
 	  .switchMap((params: ParamMap) => {
 		  //console.log("product-detail.component:" + params.get('id'));
-		  return this.productService.getProduct(params.get('code'))
+		  return this.productService.getProduct(params.get('type'))
 	  });
 
     this.product$.subscribe(
       product => {
         this.product = product;
-        
+
       },
       error => console.log("ERROR"),
       () => console.log("finish")

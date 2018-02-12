@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit {
 					if (count === 0)
 						this.types.push(p);
 
-					console.log(p);
+					//console.log(p);
 				}
 			},
 			error => console.log("ERROR"),
