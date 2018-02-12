@@ -31,7 +31,7 @@ router.get('/:id', (req, res, next) => {
 */
 
 router.get('/:type', (req, res, next) => {
-  db.products.findOne({ type: req.params.type }, (err, product) => {
+  db.products.find({ type: req.params.type }, (err, product) => {
     if (err) {
       res.send(err);
     }

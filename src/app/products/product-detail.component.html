@@ -1,4 +1,10 @@
 <h1>PRODUCT DETAILS</h1>
+
+<ul *ngFor="let product of p">
+  <li><a >{{ p.name }}</a>: ${{ p.price }} ({{p.type}})</li>
+</ul>
+
+
 <div *ngIf="product as product">
 	<h2>{{product.name}}</h2>
 

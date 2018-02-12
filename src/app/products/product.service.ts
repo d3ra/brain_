@@ -18,6 +18,14 @@ export class ProductService {
       .map(result => this.result = result.json());
   }
 
+
+  getProductsByType(type: string):Observable<Product[]> {
+    console.log("product.service: " + type);
+    return this._http.get("/api/products/" + type)
+      .map(result => this.result = result.json());
+  }
+     
+
   getProduct(id: number | string):Observable<Product> {
   	console.log("product.service: " + id);
   	return this._http.get("/api/products/" + id)

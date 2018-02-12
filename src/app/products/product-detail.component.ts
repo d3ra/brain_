@@ -17,6 +17,8 @@ export class ProductDetailComponent implements OnInit {
 
   product$: Observable<Product>;
   product: Product;
+  products$: Observable<Product[]>;
+  products: Product[];
   quantity: number;
   minQuantity: number;
   maxQuantity: number;
@@ -34,6 +36,21 @@ export class ProductDetailComponent implements OnInit {
     this.product$.subscribe(
       product => {
         this.product = product;
+
+      },
+      error => console.log("ERROR"),
+      () => console.log("finish")
+    );
+
+    this.products$ = this.route.paramMap
+    .switchMap((params: ParamMap) => {
+      //console.log("product-detail.component:" + params.get('id'));
+      return this.productService.getProductsByType(params.get('type'))
+    });
+
+    this.products$.subscribe(
+      product => {
+        this.products = product;
 
       },
       error => console.log("ERROR"),
@@ -67,10 +84,4 @@ export class ProductDetailComponent implements OnInit {
       return;
     this.quantity += num;
   }
-
-}
-
-interface PurchaseOptions {
-  size: string,
-  quantity: number
 }
