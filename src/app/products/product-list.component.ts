@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
 			.switchMap((params: ParamMap) => {
 				// (+) before `params.get()` turns the string into a number
         		//this.selectedId = +params.get('id');
-        		this.selectedId = params.get('id');
+        		//this.selectedId = params.get('id');
         		return this.productService.getProducts();
 		});
 

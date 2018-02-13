@@ -15,10 +15,14 @@ import { Cart } from '../models/cart';
 
 export class ProductDetailComponent implements OnInit {
 
-  product$: Observable<Product>;
-  product: Product;
+  //product$: Observable<Product>;
+  //product: Product;
+  selected: Product;
   products$: Observable<Product[]>;
   products: Product[];
+  styles: string[] = [];
+  colors: string[] = [];
+  sizes: string[] = [];
   quantity: number;
   minQuantity: number;
   maxQuantity: number;
@@ -27,35 +31,60 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.quantity = 1;
-	  this.product$ = this.route.paramMap
-	  .switchMap((params: ParamMap) => {
-		  //console.log("product-detail.component:" + params.get('id'));
-		  return this.productService.getProduct(params.get('type'))
-	  });
-
-    this.product$.subscribe(
-      product => {
-        this.product = product;
-
-      },
-      error => console.log("ERROR"),
-      () => console.log("finish")
-    );
-
+    
     this.products$ = this.route.paramMap
     .switchMap((params: ParamMap) => {
       //console.log("product-detail.component:" + params.get('id'));
       return this.productService.getProductsByType(params.get('type'))
     });
-
     this.products$.subscribe(
-      product => {
-        this.products = product;
+      products => {
+        this.products = products;
+        // calcola styles, colors e sizes in base ai prodotti
+        for(let p of products) {
+          let foundStyle = 0;
+          let foundColor = 0;
+          let foundSize = 0;
+          // inizializza
+          if(this.styles.length === 0) {
+            this.styles.push(p.style);
+          }
+          if(this.colors.length === 0) {
+            this.colors.push(p.color);
+          }
+          if(this.sizes.length === 0){
+            this.sizes.push(p.size);
+          }
+          debugger;
+          // riempi
+          for(let s of this.styles) {
+            if(p.style === s)
+              foundStyle++;
+          }
+          if(foundStyle === 0)
+            this.styles.push(p.style);
+
+          for(let c of this.colors) {
+            if(p.color === c)
+              foundColor++;
+          }
+          if(foundColor === 0)
+            this.colors.push(p.color);
+          for(let z of this.sizes) {
+            if(p.size === z)
+              foundSize++;
+          }
+          if(foundSize === 0)
+            this.sizes.push(p.size);
+          debugger;
+        }
 
       },
       error => console.log("ERROR"),
       () => console.log("finish")
     );
+
+    // calcola il prodotto selezionato in base a quali bottoni sono selected
 
   }
 
