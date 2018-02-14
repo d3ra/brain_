@@ -4,49 +4,28 @@
   <li><a >{{ p.code }}</a>: {{ p.color }}, {{ p.size }}, {{ p.quantity }}</li>
 </ul>
 
-<ul *ngFor="let s of styles">
-  <li>{{ s }}</li>
-</ul>
-
-<ul *ngFor="let c of colors">
-  <li>{{ c }}</li>
-</ul>
-
-<ul *ngFor="let z of sizes">
-  <li>{{ z }}</li>
-</ul>
-
-
-<div *ngIf="product as product">
-	<h2>{{product.name}}</h2>
-
-  <div>
-    <p>SIZE</p>
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary active">
-        <input type="radio" name="options" id="optionXS" autocomplete="off" checked /> XS
-      </label>
-      <label class="btn btn-primary">
-        <input type="radio" name="options" id="optionS" autocomplete="off" /> S
-      </label>
-      <label class="btn btn-primary">
-        <input type="radio" name="options" id="optionM" autocomplete="off" /> M
-      </label>
-      <label class="btn btn-primary">
-        <input type="radio" name="options" id="optionL" autocomplete="off" /> L
-      </label>
-      <label class="btn btn-primary">
-        <input type="radio" name="options" id="optionXL" autocomplete="off" /> XL
-      </label>
-    </div>
-  </div>
-
-  <div>
-    <p>QUANTITY</p>
-    <button class="btn btn-minus" (click)="addQuantity(-1)">-</button>
-    <label> {{quantity}} </label>
-    <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
-  </div>
-
-  <button (click)="addToCart(product)">ADD to CART</button>
+<p>Styles</p>
+<div *ngFor="let s of styles" class="btn-group">
+  <label *ngIf="s !== ''" class="btn btn-primary" (click)="selectStyle(s)">{{ s }}</label>
 </div>
+
+<p>Colors</p>
+<div *ngFor="let c of colors" class="btn-group">
+  <label class="btn btn-primary" [ngStyle]="{'background-color': c.colorcode}" (click)="selectColor(c.color)">{{ c.color }}</label>
+</div>
+
+<p>Sizes</p>
+<div *ngFor="let z of sizes" class="btn-group">
+  <label class="btn btn-primary" (click)="selectSize(z)">{{ z }}</label>
+</div>
+
+
+<div>
+  <p>QUANTITY</p>
+  <button class="btn btn-minus" (click)="addQuantity(-1)">-</button>
+  <label> {{quantity}} </label>
+  <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
+</div>
+
+<button (click)="addToCart(product)">ADD to CART</button>
+

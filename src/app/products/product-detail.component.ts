@@ -20,9 +20,15 @@ export class ProductDetailComponent implements OnInit {
   selected: Product;
   products$: Observable<Product[]>;
   products: Product[];
+  
   styles: string[] = [];
-  colors: string[] = [];
+  colors: {color: string, colorcode: string}[] = [];
   sizes: string[] = [];
+
+  style: string;
+  color: string;
+  size: string;
+
   quantity: number;
   minQuantity: number;
   maxQuantity: number;
@@ -42,41 +48,44 @@ export class ProductDetailComponent implements OnInit {
         this.products = products;
         // calcola styles, colors e sizes in base ai prodotti
         for(let p of products) {
-          let foundStyle = 0;
-          let foundColor = 0;
-          let foundSize = 0;
+          let foundStyle = false;
+          let foundColor = false;
+          let foundSize = false;
           // inizializza
           if(this.styles.length === 0) {
             this.styles.push(p.style);
+            this.style = p.style;
           }
           if(this.colors.length === 0) {
-            this.colors.push(p.color);
+            this.colors.push({color: p.color, colorcode: p.colorcode});
+            this.color = p.color;
           }
           if(this.sizes.length === 0){
             this.sizes.push(p.size);
+            this.size = p.size;
           }
-          debugger;
+          //debugger;
           // riempi
           for(let s of this.styles) {
             if(p.style === s)
-              foundStyle++;
+              foundStyle = true;
           }
-          if(foundStyle === 0)
+          if(!foundStyle)
             this.styles.push(p.style);
 
           for(let c of this.colors) {
-            if(p.color === c)
-              foundColor++;
+            if(p.color === c.color)
+              foundColor = true;
           }
-          if(foundColor === 0)
-            this.colors.push(p.color);
+          if(!foundColor)
+            this.colors.push({color: p.color, colorcode: p.colorcode});
           for(let z of this.sizes) {
             if(p.size === z)
-              foundSize++;
+              foundSize = true;
           }
-          if(foundSize === 0)
+          if(!foundSize)
             this.sizes.push(p.size);
-          debugger;
+          //debugger;
         }
 
       },
@@ -85,6 +94,23 @@ export class ProductDetailComponent implements OnInit {
     );
 
     // calcola il prodotto selezionato in base a quali bottoni sono selected
+
+  }
+
+  selectStyle(style: string) {
+    this.style = style;
+  }
+  
+  selectColor(color: string) {
+    this.color = color;
+  }
+  
+  selectSize(size: string) {
+    this.size = size;
+  }
+
+
+  getSelected(style: string, color: string, size: string) {
 
   }
 
