@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\dist",
+    "\\e2e",
+    "\\server",
+    "\\server\\routes",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\cart",
+    "\\src\\app\\models",
+    "\\src\\app\\products",
+    "\\src\\environments",
+    "\\src\\images"
+  ],
+  "PreviewInSolutionExplorer": false
+}

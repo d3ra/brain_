@@ -1,31 +1,49 @@
-<h1>PRODUCT DETAILS</h1>
+<div class="container">
+  <div class="row">
+    <div class="product-image col-sm">
+      <img src="./src/images/baseball.png" />
+    </div>
+    <div class="product-info col-sm">
+      <h1>{{ selectedProduct?.name }}</h1>
 
-<ul *ngFor="let p of products">
-  <li><a >{{ p.code }}</a>: {{ p.color }}, {{ p.size }}, {{ p.quantity }}</li>
-</ul>
+      <h4>CODE: {{ selectedProduct?.code }}</h4>
+      <h3>PRICE: {{ selectedProduct?.price }}$</h3>
+      <h3>QUANTITY: {{ selectedProduct?.quantity }}</h3>
 
-<p>Styles</p>
-<div *ngFor="let s of styles" class="btn-group">
-  <label *ngIf="s !== ''" class="btn btn-primary" (click)="selectStyle(s)">{{ s }}</label>
+      <p>Styles</p>
+      <div *ngFor="let s of styles" class="btn-group">
+        <label *ngIf="s !== ''; else noStyle" class="btn btn-primary" (click)="selectStyle(s)">{{ s }}</label>
+        <ng-template #noStyle>
+          <p>No Style needed!</p>
+        </ng-template>
+      </div>
+
+      <p>Colors</p>
+      <div *ngFor="let c of colors" class="btn-group">
+        <label class="btn btn-primary" [ngStyle]="{'background-color': c.colorcode}" (click)="selectColor(c.color)">{{ c.color }}</label>
+      </div>
+
+      <!--
+      <p>Sizes</p>
+      <div *ngFor="let z of sizes" class="btn-group">
+        <label class="btn btn-primary" (click)="selectSize(z)">{{ z }}</label>
+      </div>
+      -->
+
+      <p>Sizes</p>
+      <div *ngFor="let z of sizes" class="btn-group">
+        <label class="btn btn-primary"><input type="radio" [(ngModel)]="size" />{{ z }}</label>
+      </div>
+
+      <div>
+        <p>
+        <p>QUANTITY</p>
+        <button class="btn btn-minus" (click)="addQuantity(-1)">-</button>
+        <label> {{quantity}} </label>
+        <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
+      </div>
+
+      <button (click)="addToCart(product)">ADD to CART</button>
+    </div>
+  </div>
 </div>
-
-<p>Colors</p>
-<div *ngFor="let c of colors" class="btn-group">
-  <label class="btn btn-primary" [ngStyle]="{'background-color': c.colorcode}" (click)="selectColor(c.color)">{{ c.color }}</label>
-</div>
-
-<p>Sizes</p>
-<div *ngFor="let z of sizes" class="btn-group">
-  <label class="btn btn-primary" (click)="selectSize(z)">{{ z }}</label>
-</div>
-
-
-<div>
-  <p>QUANTITY</p>
-  <button class="btn btn-minus" (click)="addQuantity(-1)">-</button>
-  <label> {{quantity}} </label>
-  <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
-</div>
-
-<button (click)="addToCart(product)">ADD to CART</button>
-

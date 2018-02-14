@@ -16,8 +16,6 @@ import { Cart } from '../models/cart';
 export class ProductDetailComponent implements OnInit {
 
   //product$: Observable<Product>;
-  //product: Product;
-  selected: Product;
   products$: Observable<Product[]>;
   products: Product[];
   
@@ -25,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
   colors: {color: string, colorcode: string}[] = [];
   sizes: string[] = [];
 
+  selectedProduct: Product;
   style: string;
   color: string;
   size: string;
@@ -37,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.quantity = 1;
-    
+
     this.products$ = this.route.paramMap
     .switchMap((params: ParamMap) => {
       //console.log("product-detail.component:" + params.get('id'));
@@ -52,6 +51,10 @@ export class ProductDetailComponent implements OnInit {
           let foundColor = false;
           let foundSize = false;
           // inizializza
+
+          if (this.selectedProduct === undefined)
+            this.selectedProduct = p;
+
           if(this.styles.length === 0) {
             this.styles.push(p.style);
             this.style = p.style;
@@ -99,19 +102,24 @@ export class ProductDetailComponent implements OnInit {
 
   selectStyle(style: string) {
     this.style = style;
+    this.setSelected();
   }
   
   selectColor(color: string) {
     this.color = color;
+    this.setSelected();
   }
   
   selectSize(size: string) {
     this.size = size;
+    this.setSelected();
   }
 
-
-  getSelected(style: string, color: string, size: string) {
-
+  setSelected() {
+    for (let p of this.products) {
+      if (p.style === this.style && p.color === this.color && p.size === this.size)
+        this.selectedProduct = p;
+    }
   }
 
   addToCart(product: Product) {
