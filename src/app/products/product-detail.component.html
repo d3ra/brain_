@@ -23,17 +23,22 @@
         <label class="btn btn-primary" [ngStyle]="{'background-color': c.colorcode}" (click)="selectColor(c.color)">{{ c.color }}</label>
       </div>
 
-      <!--
+      
       <p>Sizes</p>
       <div *ngFor="let z of sizes" class="btn-group">
         <label class="btn btn-primary" (click)="selectSize(z)">{{ z }}</label>
       </div>
-      -->
 
+      
+      <p *ngIf="selectedProduct !== undefined && selectedProduct?.quantity === 0" class="alert-danger">Not available!</p>
+      
+
+      <!--
       <p>Sizes</p>
       <div *ngFor="let z of sizes" class="btn-group">
         <label class="btn btn-primary"><input type="radio" [(ngModel)]="size" />{{ z }}</label>
       </div>
+      -->
 
       <div>
         <p>
@@ -43,7 +48,7 @@
         <button class="btn btn-plus" (click)="addQuantity(1)">+</button>
       </div>
 
-      <button (click)="addToCart(product)">ADD to CART</button>
+      <button (click)="addToCart(selectedProduct)">ADD to CART</button>
     </div>
   </div>
 </div>

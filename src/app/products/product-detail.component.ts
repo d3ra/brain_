@@ -29,8 +29,6 @@ export class ProductDetailComponent implements OnInit {
   size: string;
 
   quantity: number;
-  minQuantity: number;
-  maxQuantity: number;
 
 	constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) {}
 
@@ -95,9 +93,6 @@ export class ProductDetailComponent implements OnInit {
       error => console.log("ERROR"),
       () => console.log("finish")
     );
-
-    // calcola il prodotto selezionato in base a quali bottoni sono selected
-
   }
 
   selectStyle(style: string) {
@@ -120,6 +115,8 @@ export class ProductDetailComponent implements OnInit {
       if (p.style === this.style && p.color === this.color && p.size === this.size)
         this.selectedProduct = p;
     }
+    if(this.quantity > this.selectedProduct.quantity)
+      this.quantity = this.selectedProduct.quantity;
   }
 
   addToCart(product: Product) {
@@ -135,7 +132,12 @@ export class ProductDetailComponent implements OnInit {
       for (let p of currentCart.products) {
         newCart.addProduct(p);
       }
-      newCart.addProduct(product);
+      if(product.quantity > 0)
+        newCart.addProduct(product);
+      else {
+        alert("Product not available!");
+        return;
+      }
       // salva il carrello sul localStorage
       localStorage.setItem('my-cart', JSON.stringify(newCart));
     }
@@ -143,7 +145,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addQuantity(num: number) {
-    if ((num < 0 && this.quantity === 1) || (num > 0 && this.quantity === 9))
+    if ((num < 0 && this.quantity <= 1) || (num > 0 && this.quantity === 9) || (num > 0 && this.quantity === this.selectedProduct.quantity))
       return;
     this.quantity += num;
   }
