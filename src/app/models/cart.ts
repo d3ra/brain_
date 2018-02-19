@@ -75,4 +75,5 @@ export class Cart {
   isEmpty() {
   	return (this.products.length === 0 && this.total === 0) 
   }
+
 }

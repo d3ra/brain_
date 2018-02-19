@@ -7,7 +7,11 @@
 <!--PIENO-->
 <div *ngIf="!cart.isEmpty()">
 	<ul *ngFor="let p of cart.products">
-		<li><a [routerLink]="['/product', p.product.type]">{{ p.product.name }}</a>: ${{ p.product.price }} x {{ p.quantity }} <span class="glyphicon glyphicon-remove" (click)="removeFromCart(p.product.code)"></span></li>
+		<li>
+			<p>
+				<a [routerLink]="['/product', p.product.type]">{{ p.product.name }}</a>: ${{ p.product.price }} x {{ p.quantity }} - <span class="glyphicon glyphicon-remove-circle" (click)="removeFromCart(p.product.code)"></span>
+			</p>
+		</li>
 	</ul>
 </div>
 

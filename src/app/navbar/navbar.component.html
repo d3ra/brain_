@@ -42,7 +42,9 @@
             <!-- RIGHT -->
             <!-- if not logged in -->
             <ul class="nav navbar-nav navbar-right" (click)="collapseMenu()">
-                <li><a [routerLink]="['/cart']"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                <li>
+                    <a [routerLink]="['/cart']"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a>
+                </li>
                 <!-- Contatti e faq le metterei nel footer
                 <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-user"></span> Contacts</a></li>
                 <li><a [routerLink]="['/']"><span class="glyphicon glyphicon-question-sign"></span> faq</a></li>
