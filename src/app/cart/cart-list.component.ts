@@ -28,38 +28,29 @@ export class CartListComponent implements OnInit {
 			localStorage.setItem('my-cart', JSON.stringify(newCart));
 		} else {
 			// se ho già un carrello
-			let currentCart = JSON.parse(localStorage.getItem('my-cart'));
+			let currentCart: Cart = JSON.parse(localStorage.getItem('my-cart'));
 			// aggiungo i suoi oggetti al mio carrello
 			for (let p of currentCart.products) {
-				newCart.addProduct(p);
+				newCart.addProduct(p.product, p.quantity);
 			}
-			/*
-			// Inizializza il carrello per esempio
-			let prod: Product = new Product();
-			prod._id = "1";
-			prod.name = "prodotto di prova";
-			prod.price = 110;
-			let prod2: Product = new Product();
-			prod2.name = "prodotto 2"
-			prod2._id = "2"
-			prod2.price = 50;
-			newCart.addProduct(prod);
-			newCart.addProduct(prod2);
-			*/
-			// salva il carrello sul localStorage
 			localStorage.setItem('my-cart', JSON.stringify(newCart));
 		}
 		this.cart = newCart;
 		//console.log("POST: " + localStorage.getItem('my-cart'));
 	}
 
-	removeFromCart(code: number | string) {
+	removeFromCart(code: number | string, quantity?: number) {
+		let toRemove: Product;
 		for(let prod of this.cart.products) {
-			if(prod.code === code) {
-				var toRemove: Product = prod; 
+			if(prod.product.code === code) {
+				toRemove = prod.product; 
 			}
 		}
-		//console.log("remove: " + toRemove.name);
+		if(toRemove === undefined) {
+			alert("Prod not found!")
+			return;
+		}
+		console.log("remove: " + toRemove.name);
 		this.cart.removeProduct(toRemove);
 		localStorage.setItem('my-cart', JSON.stringify(this.cart));
 	}

@@ -123,17 +123,18 @@ export class ProductDetailComponent implements OnInit {
     let newCart: Cart = new Cart();
 
     if(localStorage.getItem('my-cart') === null) {
-      newCart.addProduct(product);
+      newCart.addProduct(product, this.quantity);
       localStorage.setItem('my-cart', JSON.stringify(newCart));
     } else {
       // se ho già un carrello
-      let currentCart = JSON.parse(localStorage.getItem('my-cart'));
+      let currentCart: Cart = JSON.parse(localStorage.getItem('my-cart'));
       // aggiungo i suoi oggetti al mio carrello
       for (let p of currentCart.products) {
-        newCart.addProduct(p);
+        newCart.addProduct(p.product, p.quantity);
       }
-      if(product.quantity > 0)
-        newCart.addProduct(product);
+      if(product.quantity > 0 && this.quantity > 0) {
+        newCart.addProduct(product, this.quantity);
+      }
       else {
         alert("Product not available!");
         return;
