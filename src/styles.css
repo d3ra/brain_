@@ -13,4 +13,6 @@ body {
 
 .jumbotron {
   background-color: rgba(238, 238, 238, 0.35);
+  height: 100vh;
+  margin-bottom: 0px;
 }
